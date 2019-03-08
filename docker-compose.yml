@@ -5,13 +5,13 @@ services:
     build:
         context: ./
         dockerfile: Dockerfile
-    image: asperitus/dui:latest
+    image: asperitus/docker-compose-ui:latest
     restart: always
     container_name: dui
     hostname: dui
     # working_dir: /opt/docker-compose/
-    environment:
-      - 'WEB_CONSOLE_PATTERN=/web-console/?cid={containerName}&cmd={command}'
+    # environment:
+    #   - 'WEB_CONSOLE_PATTERN=/web-console/?cid={containerName}&cmd={command}'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     #   - ./:/opt/docker-compose
@@ -27,14 +27,14 @@ services:
       - "traefik.frontend.rule=Host:dui.home"
       - "traefik.port=5000"
 
-  web_console:
-    image: bitbull/docker-exec-web-console
-    environment:
-      - CONTEXT_PATH=/web-console/
-    read_only: true
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  # web_console:
+  #   image: bitbull/docker-exec-web-console
+  #   environment:
+  #     - CONTEXT_PATH=/web-console/
+  #   read_only: true
+  #   restart: always
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   web:
